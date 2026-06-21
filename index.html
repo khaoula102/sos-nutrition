@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoS Nutrition — Cabinet de Nutrition & Bien-être · Agadir</title>
+  <meta name="description" content="Cabinet de nutrition et bien-être à Agadir. Consultations personnalisées, soins minceur, massages thérapeutiques." />
+
+  <!-- Prevent theme flash -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('sos-theme');
+      if (t === 'dark') document.documentElement.setAttribute('data-theme','dark');
+    })();
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Nunito+Sans:wght@200;300;400;600&family=Cormorant:ital,wght@1,400;1,500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  
+
+  <style>
+    /* ═══════════════════════════════════
+       DESIGN TOKENS
+    ═══════════════════════════════════ */
+    :root {
+      --teal:        #3BBFBF;
+      --teal-deep:   #2A9898;
+      --teal-pale:   #D6F0F0;
+      --teal-glass:  rgba(59,191,191,0.12);
+      --sage:        #7CBD6B;
+      --sage-deep:   #5CA64A;
+      --sage-pale:   #E8F5E3;
+      --gold:        #C9A96E;
+      --ivory:       #FAFAF7;
+      --cream:       #F4F1EC;
+      --warm-white:  #FFFFFF;
+      --ink:         #1C2B2B;
+      --ink-mid:     #3A4F4F;
+      --ink-soft:    #6B8080;
+      --ink-ghost:   #A8BFBF;
+      --card-bg:     #FFFFFF;
+      --card-bg-2:   #FAFAF7;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-italic:  'Cormorant', Georgia, serif;
+      --font-body:    'Nunito Sans', sans-serif;
+
+      --radius-sm:   8px;
+      --radius-md:   18px;
+      --radius-lg:   36px;
+      --radius-xl:   60px;
+
+      --shadow-sm:   0 2px 16px rgba(43,152,152,0.08);
+      --shadow-md:   0 8px 40px rgba(43,152,152,0.14);
+      --shadow-lg:   0 24px 80px rgba(28,43,43,0.12);
+
+      --transition:  all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ═══════════════════════════════════
+       DARK THEME TOKENS
+    ═══════════════════════════════════ */
+    [data-theme="dark"] {
+      --ivory:       #0C1818;
+      --cream:       #0F1E1E;
+      --teal-pale:   rgba(59,191,191,0.16);
+      --teal-glass:  rgba(59,191,191,0.18);
+      --sage-pale:   rgba(124,189,107,0.13);
+      --ink:         #DFF2F2;
+      --ink-mid:     #AECECE;
+      --ink-soft:    #7AA0A0;
+      --ink-ghost:   #4A6A6A;
+      --card-bg:     #152424;
+      --card-bg-2:   #0C1818;
+      --shadow-sm:   0 2px 16px rgba(0,0,0,0.45);
+      --shadow-md:   0 8px 40px rgba(0,0,0,0.55);
+      --shadow-lg:   0 24px 80px rgba(0,0,0,0.65);
+    }
+    [data-theme="dark"] .form-multiselect-click {
+      background: #FFFFFF;            /* fond blanc pur (ou var(--cream) selon votre préférence) */
+      color: var(--ink);              /* texte sombre pour rester lisible */
+      border-color: rgba(59,191,191,0.4);
+    }
+
+    [data-theme="dark"] .form-multiselect-click option {
+      background: var(--cream);       /* option non sélectionnée : fond clair */
+      color: var(--ink);
+    }
+
+    [data-theme="dark"] .form-multiselect-click option:checked {
+      background: var(--teal);        /* conserve la couleur de validation */
+      color: white;
+    }
+    [data-theme="dark"] .form-multiselect-click {
+      background: rgba(0,0,0,0.3);
+      color: white;
+    }
+
+    [data-theme="dark"] #rdv {
+      background: linear-gradient(160deg, #1C2B2B 0%, #1e3535 100%);
+    }
+
+    /* Dark mode component overrides */
+    [data-theme="dark"] nav {
+      background: rgba(10,20,20,0.94) !important;
+      border-bottom-color: rgba(59,191,191,0.22) !important;
+    }
+    [data-theme="dark"] .mobile-nav {
+      background: rgba(10,20,20,0.99) !important;
+    }
+    [data-theme="dark"] .mobile-nav a { color: var(--ink); }
+    [data-theme="dark"] .service-card { background: var(--card-bg); border-color: rgba(59,191,191,0.2); }
+    [data-theme="dark"] .service-card:hover { background: #1C2F2F; }
+    [data-theme="dark"] .service-card.pack-card {
+      background: linear-gradient(160deg, rgba(59,191,191,0.18), rgba(124,189,107,0.12)) !important;
+      border-color: rgba(59,191,191,0.3) !important;
+    }
+    [data-theme="dark"] .hero-badge { background: var(--card-bg); }
+    [data-theme="dark"] .hero-badge .badge-title { color: var(--ink); }
+    [data-theme="dark"] .hero-badge .badge-sub { color: var(--ink-soft); }
+    [data-theme="dark"] .distance-mockup { background: var(--card-bg); border-color: rgba(59,191,191,0.2); }
+    [data-theme="dark"] .dm-feat { background: var(--card-bg-2); }
+    [data-theme="dark"] .dm-feat:hover { background: rgba(59,191,191,0.18); }
+    [data-theme="dark"] .dm-header { border-bottom-color: rgba(255,255,255,0.08); }
+    [data-theme="dark"] .promise-card { background: var(--card-bg) !important; }
+    [data-theme="dark"] .certif-badge { background: var(--card-bg); color: var(--ink-mid); border-color: rgba(59,191,191,0.25); }
+    [data-theme="dark"] .about-manager-card { background: var(--card-bg); border-color: rgba(59,191,191,0.2); }
+    [data-theme="dark"] .tg-row { background: var(--card-bg); border-color: rgba(59,191,191,0.14); }
+    [data-theme="dark"] .tg-row:hover { background: rgba(59,191,191,0.15); border-color: var(--teal); }
+    [data-theme="dark"] .tg-row-name { color: var(--ink); }
+    [data-theme="dark"] .tg-row-pack { color: var(--ink-soft); }
+    [data-theme="dark"] .sc-variant { background: var(--card-bg-2); color: var(--ink-mid); }
+    [data-theme="dark"] .sc-name { color: var(--ink); }
+    [data-theme="dark"] .df-label { color: var(--ink); }
+    [data-theme="dark"] .df-sub { color: var(--ink-soft); }
+    [data-theme="dark"] .dm-name { color: var(--ink); }
+    [data-theme="dark"] .theme-toggle { background: var(--card-bg); border-color: rgba(59,191,191,0.3); }
+    [data-theme="dark"] .hero-img-frame { background: linear-gradient(160deg, rgba(59,191,191,0.2), rgba(124,189,107,0.15)); }
+    [data-theme="dark"] #promo { background: linear-gradient(135deg, #050D0D 0%, #0A1A1A 60%, #142E2E 100%); }
+    [data-theme="dark"] footer { background: #070E0E; }
+    [data-theme="dark"] .footer-main { border-bottom-color: rgba(255,255,255,0.07); }
+    [data-theme="dark"] .about-visual-wrap {
+      background: linear-gradient(160deg, rgba(59,191,191,0.18), rgba(124,189,107,0.12)) !important;
+    }
+    [data-theme="dark"] .sc-desc { color: var(--ink-soft); }
+    [data-theme="dark"] .sc-cta { color: var(--teal); }
+    [data-theme="dark"] .pack-card .sc-desc { color: var(--teal-deep) !important; }
+    [data-theme="dark"] .pack-card .sc-cta { color: var(--teal-deep) !important; }
+    [data-theme="dark"] .nav-links a { color: var(--ink-mid); }
+    [data-theme="dark"] .hero-bg-shape {
+      background: radial-gradient(ellipse at 40% 40%, rgba(59,191,191,0.12) 0%, transparent 70%);
+    }
+
+    /* ═══════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--ivory);
+      color: var(--ink);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 10px; }
+
+    /* ═══════════════════════════════════
+       UTILITY
+    ═══════════════════════════════════ */
+    .container { width: min(1160px, 92%); margin-inline: auto; }
+    .tag {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal-deep);
+      padding: 0.35em 1.1em;
+      border: 1px solid var(--teal);
+      border-radius: 100px;
+      margin-bottom: 1.4rem;
+    }
+    .tag.sage { color: var(--sage-deep); border-color: var(--sage); }
+    .tag.gold { color: var(--gold); border-color: var(--gold); }
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      line-height: 1.12;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+    .section-title em { font-style: italic; color: var(--teal-deep); }
+    .section-sub {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      line-height: 1.75;
+      max-width: 540px;
+    }
+    .divider-line {
+      width: 52px; height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--sage));
+      border-radius: 2px;
+      margin: 1.4rem 0 2rem;
+    }
+
+    /* ═══════════════════════════════════
+       NAV
+    ═══════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      background: rgba(250,250,247,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(59,191,191,0.15);
+      transition: var(--transition);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px;
+      width: min(1160px, 92%);
+      margin-inline: auto;
+      gap: 1rem;
+    }
+    .nav-logo img { height: 48px; width: auto; }
+    .nav-links {
+      display: flex; align-items: center; gap: 2.4rem;
+      list-style: none;
+      flex: 1;
+      justify-content: center;
+    }
+    .nav-links a {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: -3px; left: 0; right: 0;
+      height: 1px; background: var(--teal);
+      transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+    }
+    .nav-links a:hover { color: var(--teal-deep); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--teal), var(--teal-deep)) !important;
+      color: white !important; padding: 0.6em 1.6em;
+      border-radius: 100px; font-size: 0.78rem !important;
+      letter-spacing: 0.1em !important; transition: var(--transition) !important;
+      box-shadow: 0 4px 20px rgba(59,191,191,0.3);
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(59,191,191,0.4) !important; }
+
+    /* ═════════════════════
+       NAV CONTROLS (Lang + Theme)
+    ═════════════════════ */
+    .nav-controls {
+      display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0;
+    }
+    .lang-switch {
+      display: flex; align-items: center; gap: 0;
+      background: var(--cream);
+      border: 1px solid rgba(59,191,191,0.2);
+      border-radius: 100px;
+      padding: 0.2em 0.3em;
+      transition: background 0.4s;
+    }
+    .lang-btn {
+      background: none; border: none;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      font-weight: 400;
+      color: var(--ink-soft);
+      cursor: pointer;
+      padding: 0.3em 0.65em;
+      border-radius: 100px;
+      transition: all 0.25s ease;
+      line-height: 1;
+    }
+    .lang-btn.active {
+      background: var(--teal);
+      color: white;
+      font-weight: 600;
+    }
+    .theme-toggle {
+      width: 34px; height: 34px;
+      background: var(--cream);
+      border: 1px solid rgba(59,191,191,0.22);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 0.88rem;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+    .theme-toggle:hover { border-color: var(--teal); background: var(--teal-pale); transform: rotate(20deg); }
+
+    .nav-hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); border-radius: 2px; transition: var(--transition); }
+
+    /* ═══════════════════════════════════
+       HERO
+    ═══════════════════════════════════ */
+    #hero {
+      min-height: 100svh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; padding-top: 72px;
+      position: relative; overflow: hidden; background: var(--ivory);
+    }
+    .hero-bg-shape {
+      position: absolute; top: -15%; right: -8%;
+      width: 65vw; height: 65vw; max-width: 800px; max-height: 800px;
+      background: radial-gradient(ellipse at 40% 40%, var(--teal-pale) 0%, transparent 70%);
+      border-radius: 50%; pointer-events: none; z-index: 0;
+    }
+    .hero-bg-dots {
+      position: absolute; bottom: 10%; left: 4%; width: 180px; height: 180px;
+      background-image: radial-gradient(var(--teal-glass) 1.5px, transparent 1.5px);
+      background-size: 18px 18px; pointer-events: none; z-index: 0; opacity: 0.6;
+    }
+    .hero-content { position: relative; z-index: 1; padding: 5vw 0 5vw 5vw; animation: fadeSlideUp 1s ease both; }
+    .hero-h1 {
+      font-family: var(--font-display); font-weight: 300;
+      font-size: clamp(2.8rem, 5vw, 4.6rem); line-height: 1.08;
+      color: var(--ink); margin-bottom: 1.2rem;
+    }
+    .hero-h1 em { font-style: italic; color: var(--teal-deep); display: block; }
+    .hero-h1 strong {
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--teal-deep), var(--sage-deep));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-tagline {
+      font-family: var(--font-body); font-weight: 200; font-size: 1.1rem;
+      color: var(--ink-soft); line-height: 1.8; max-width: 420px; margin-bottom: 2.4rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.6em;
+      background: linear-gradient(135deg, var(--teal), var(--teal-deep)); color: white;
+      padding: 0.85em 2.2em; border-radius: 100px;
+      font-family: var(--font-body); font-weight: 400; font-size: 0.88rem;
+      letter-spacing: 0.06em; box-shadow: 0 8px 32px rgba(59,191,191,0.32); transition: var(--transition);
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(59,191,191,0.42); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.6em;
+      color: var(--teal-deep); padding: 0.85em 1.8em; border-radius: 100px;
+      font-family: var(--font-body); font-weight: 400; font-size: 0.88rem;
+      letter-spacing: 0.06em; border: 1.5px solid var(--teal); transition: var(--transition);
+    }
+    .btn-secondary:hover { background: var(--teal-pale); transform: translateY(-2px); }
+    .hero-stats {
+      display: flex; gap: 2.4rem; margin-top: 3rem;
+      padding-top: 2rem; border-top: 1px solid rgba(59,191,191,0.2);
+    }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 500; color: var(--teal-deep); line-height: 1; }
+    .stat-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-ghost); font-weight: 300; margin-top: 0.3rem; }
+
+    .hero-visual {
+      position: relative; z-index: 1;
+      display: flex; align-items: flex-end; justify-content: center;
+      height: 100%; min-height: 540px;
+    }
+    .hero-img-wrap { position: relative; width: 90%; max-width: 460px; }
+    .hero-img-frame {
+      border-radius: 50% 50% 46% 46% / 42% 42% 58% 58%;
+      overflow: hidden; aspect-ratio: 4/5;
+      background: linear-gradient(160deg, var(--teal-pale), var(--sage-pale));
+      box-shadow: var(--shadow-lg);
+    }
+    .hero-img-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 0.8s ease; }
+    .hero-img-frame:hover img { transform: scale(1.03); }
+    .hero-badge {
+      position: absolute; bottom: 12%; left: -8%;
+      background: white; border-radius: var(--radius-md);
+      padding: 1rem 1.4rem; box-shadow: var(--shadow-md);
+      display: flex; align-items: center; gap: 0.8rem;
+      animation: floatBadge 4s ease-in-out infinite;
+    }
+    .badge-icon { font-size: 1.4rem; }
+    .badge-title { font-size: 0.72rem; font-weight: 600; color: var(--ink); letter-spacing: 0.04em; }
+    .badge-sub { font-size: 0.65rem; color: var(--ink-soft); font-weight: 300; }
+    .hero-badge-2 {
+      position: absolute; top: 18%; right: -5%;
+      background: linear-gradient(135deg, var(--teal), var(--teal-deep));
+      color: white; border-radius: var(--radius-md);
+      padding: 0.9rem 1.3rem;
+      box-shadow: 0 8px 32px rgba(59,191,191,0.35);
+      animation: floatBadge 4s 1.5s ease-in-out infinite;
+    }
+    .hero-badge-2 .b2-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.8; }
+    .hero-badge-2 .b2-val { font-family: var(--font-display); font-size: 1.3rem; font-weight: 500; line-height: 1.2; }
+
+    /* ═══════════════════════════════════
+       PROMO
+    ═══════════════════════════════════ */
+    #promo {
+      background: linear-gradient(135deg, var(--ink) 0%, #1e3535 60%, var(--teal-deep) 100%);
+      padding: 4rem 0; position: relative; overflow: hidden;
+    }
+    #promo::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233BBFBF' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .promo-inner { position: relative; z-index: 1; }
+    .promo-header { text-align: center; margin-bottom: 2.4rem; }
+    .promo-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6em;
+      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.8rem; font-weight: 300;
+    }
+    .promo-eyebrow::before, .promo-eyebrow::after { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); opacity: 0.5; }
+    .promo-title { font-family: var(--font-display); font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 300; color: white; }
+    .promo-title em { color: var(--teal); font-style: italic; }
+    .promo-subtitle { font-size: 0.85rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.4rem; font-weight: 300; }
+    .promo-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
+    .promo-card {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(59,191,191,0.25);
+      border-radius: var(--radius-md); padding: 1.6rem 1.4rem;
+      text-align: center; position: relative; overflow: hidden; transition: var(--transition);
+    }
+    .promo-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--teal), var(--sage)); }
+    .promo-card:hover { background: rgba(59,191,191,0.1); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
+    .promo-card .p-icon { font-size: 1.6rem; margin-bottom: 0.7rem; }
+    .promo-card .p-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; color: white; margin-bottom: 0.3rem; }
+    .promo-card .p-desc { font-size: 0.78rem; color: rgba(255,255,255,0.55); line-height: 1.5; font-weight: 300; }
+    .promo-card .p-price { margin-top: 0.9rem; font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; color: var(--teal); }
+    .promo-card .p-old { font-size: 0.72rem; color: rgba(255,255,255,0.3); text-decoration: line-through; font-weight: 300; }
+    .promo-note { text-align: center; margin-top: 2rem; font-size: 0.78rem; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; font-weight: 300; }
+
+    /* ═══════════════════════════════════
+       DISTANCE
+    ═══════════════════════════════════ */
+    #distance { padding: 7rem 0; background: var(--ivory); position: relative; overflow: hidden; }
+    .distance-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 5rem; align-items: center; }
+    .distance-card-visual { position: relative; }
+    .distance-glow { position: absolute; inset: -20px; background: radial-gradient(ellipse at center, var(--teal-pale) 0%, transparent 70%); border-radius: 50%; z-index: 0; }
+    .distance-mockup {
+      position: relative; z-index: 1; background: white; border-radius: var(--radius-lg);
+      padding: 2.5rem; box-shadow: var(--shadow-lg); border: 1px solid rgba(59,191,191,0.15);
+    }
+    .dm-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.8rem; padding-bottom: 1.4rem; border-bottom: 1px solid var(--cream); }
+    .dm-avatar {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal-pale), var(--sage-pale));
+      display: flex; align-items: center; justify-content: center; font-size: 1.2rem; border: 2px solid var(--teal-pale);
+    }
+    .dm-name { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+    .dm-title { font-size: 0.72rem; color: var(--ink-soft); font-weight: 300; }
+    .dm-status { margin-left: auto; }
+    .status-dot { width: 8px; height: 8px; background: var(--sage); border-radius: 50%; display: inline-block; box-shadow: 0 0 0 3px var(--sage-pale); animation: pulse 2s infinite; }
+    .dm-features { display: flex; flex-direction: column; gap: 1rem; }
+    .dm-feat { display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: var(--radius-sm); background: var(--cream); transition: var(--transition); }
+    .dm-feat:hover { background: var(--teal-pale); transform: translateX(4px); }
+    .df-icon { font-size: 1.2rem; width: 36px; text-align: center; }
+    .df-label { font-size: 0.82rem; font-weight: 600; color: var(--ink); }
+    .df-sub { font-size: 0.72rem; color: var(--ink-soft); font-weight: 300; margin-top: 0.15rem; }
+    .distance-highlight {
+      display: inline-flex; align-items: center; gap: 0.6em;
+      background: linear-gradient(135deg, var(--teal), var(--sage-deep));
+      color: white; padding: 0.5em 1.4em; border-radius: 100px;
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 400;
+      margin-bottom: 1.4rem; box-shadow: 0 4px 20px rgba(59,191,191,0.28);
+    }
+    .distance-steps { margin-top: 2.4rem; display: flex; flex-direction: column; gap: 1rem; }
+    .d-step { display: flex; align-items: flex-start; gap: 1.2rem; }
+    .d-step-num {
+      width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%;
+      background: var(--teal-pale); color: var(--teal-deep);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 1.1rem; font-weight: 500;
+    }
+    .d-step-title { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+    .d-step-desc { font-size: 0.8rem; color: var(--ink-soft); font-weight: 300; line-height: 1.5; margin-top: 0.15rem; }
+
+    /* ═══════════════════════════════════
+       ABOUT
+    ═══════════════════════════════════ */
+    #about { padding: 7rem 0; background: var(--cream); position: relative; }
+    #about::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--teal), var(--sage), transparent);
+    }
+    .about-layout { display: grid; grid-template-columns: 1.15fr 1fr; gap: 5rem; align-items: center; }
+    .about-quote {
+      font-family: var(--font-italic); font-size: clamp(1.4rem, 2.5vw, 2rem);
+      color: var(--teal-deep); line-height: 1.45;
+      margin: 1.6rem 0; padding-left: 1.6rem; border-left: 3px solid var(--teal);
+    }
+    .about-text { font-size: 0.95rem; color: var(--ink-mid); line-height: 1.85; font-weight: 300; }
+    .about-certifs { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+    .certif-badge {
+      display: flex; align-items: center; gap: 0.5em;
+      background: white; border: 1px solid rgba(59,191,191,0.2);
+      border-radius: var(--radius-sm); padding: 0.55em 1em;
+      font-size: 0.75rem; color: var(--ink-mid); font-weight: 300;
+    }
+    .certif-badge span:first-child { color: var(--teal-deep); }
+    .about-manager-card {
+      margin-top: 1.4rem; background: white; border: 1px solid rgba(59,191,191,0.2);
+      border-radius: var(--radius-md); padding: 1.4rem 1.8rem;
+      display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-sm);
+    }
+    .mgr-icon { width: 42px; height: 42px; background: linear-gradient(135deg, var(--teal-pale), var(--sage-pale)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    .mgr-name { font-size: 0.85rem; font-weight: 600; color: var(--ink); }
+    .mgr-role { font-size: 0.72rem; color: var(--ink-soft); font-weight: 300; }
+
+    /* ═══════════════════════════════════
+       SERVICES
+    ═══════════════════════════════════ */
+    #services { padding: 7rem 0; background: var(--ivory); }
+    .services-intro { text-align: center; margin-bottom: 4rem; }
+    .services-intro .section-sub { margin-inline: auto; }
+    .services-intro .divider-line { margin-inline: auto; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.4rem; }
+    .service-card {
+      background: white; border-radius: var(--radius-md); padding: 2rem 1.8rem;
+      border: 1px solid rgba(59,191,191,0.12); box-shadow: var(--shadow-sm);
+      transition: var(--transition); position: relative; overflow: hidden;
+    }
+    .service-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--sage));
+      transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: rgba(59,191,191,0.25); }
+    .service-card:hover::after { transform: scaleX(1); }
+    .sc-icon { width: 52px; height: 52px; border-radius: var(--radius-sm); background: var(--teal-pale); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.2rem; }
+    .sc-icon.sage { background: var(--sage-pale); }
+    .sc-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; color: var(--ink); margin-bottom: 0.5rem; }
+    .sc-desc { font-size: 0.82rem; color: var(--ink-soft); line-height: 1.65; font-weight: 300; }
+    .sc-variants { margin-top: 1.2rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .sc-variant { font-size: 0.68rem; padding: 0.25em 0.8em; background: var(--cream); border-radius: 100px; color: var(--ink-mid); font-weight: 300; letter-spacing: 0.04em; }
+    .sc-cta { display: inline-flex; align-items: center; gap: 0.4em; margin-top: 1.4rem; font-size: 0.78rem; color: var(--teal-deep); font-weight: 400; letter-spacing: 0.05em; transition: gap 0.3s; }
+    .service-card:hover .sc-cta { gap: 0.7em; }
+
+    /* ═══════════════════════════════════
+       TARIFS
+    ═══════════════════════════════════ */
+    #tarifs { padding: 7rem 0; background: var(--cream); }
+    .tarifs-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start; }
+    .tarifs-note { margin-top: 2rem; padding: 1.4rem; background: var(--teal-pale); border-radius: var(--radius-md); font-size: 0.82rem; color: var(--teal-deep); line-height: 1.6; font-weight: 300; border-left: 3px solid var(--teal); }
+    .tarifs-grid { display: flex; flex-direction: column; gap: 2rem; }
+    .tg-name {
+      font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; color: var(--ink);
+      margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.7rem;
+    }
+    .tg-name::after { content: ''; flex: 1; height: 1px; background: rgba(59,191,191,0.25); }
+    .tg-rows { display: flex; flex-direction: column; gap: 0.5rem; }
+    .tg-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 1.2rem; background: white; border-radius: var(--radius-sm);
+      border: 1px solid rgba(59,191,191,0.1); font-size: 0.85rem; transition: var(--transition);
+    }
+    .tg-row:hover { border-color: var(--teal); background: var(--teal-pale); }
+    .tg-row-name { font-weight: 400; color: var(--ink); }
+    .tg-row-pack { font-size: 0.72rem; color: var(--ink-ghost); font-weight: 300; }
+    .tg-row-rdv { font-size: 0.72rem; color: var(--teal-deep); font-weight: 400; letter-spacing: 0.06em; padding: 0.3em 0.9em; border: 1px solid var(--teal); border-radius: 100px; white-space: nowrap; }
+
+    /* ═══════════════════════════════════
+       RDV
+    ═══════════════════════════════════ */
+    #rdv { padding: 7rem 0; background: linear-gradient(160deg, var(--ink) 0%, #1e3535 100%); position: relative; overflow: hidden; }
+    #rdv::before { content: ''; position: absolute; top: -30%; right: -10%; width: 60vw; height: 60vw; border-radius: 50%; background: radial-gradient(ellipse, rgba(59,191,191,0.1) 0%, transparent 70%); pointer-events: none; }
+    .rdv-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: center; }
+    .rdv-info .section-title { color: white; }
+    .rdv-info .section-title em { color: var(--teal); }
+    .rdv-info .section-sub { color: rgba(255,255,255,0.55); }
+    .rdv-info .divider-line { background: linear-gradient(90deg, var(--teal), transparent); }
+    .rdv-contacts { margin-top: 2.4rem; display: flex; flex-direction: column; gap: 1rem; }
+    .rdv-contact { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.4rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(59,191,191,0.2); border-radius: var(--radius-sm); transition: var(--transition); }
+    .rdv-contact:hover { background: rgba(59,191,191,0.12); }
+    .rc-icon { font-size: 1rem; width: 36px; text-align: center; color: var(--teal); }
+    .rc-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 300; }
+    .rc-val { font-size: 0.92rem; color: white; font-weight: 300; margin-top: 0.1rem; }
+    .rdv-form-wrap { background: rgba(255,255,255,0.05); border: 1px solid rgba(59,191,191,0.18); border-radius: var(--radius-lg); padding: 3rem; backdrop-filter: blur(8px); }
+    .rdv-form-title { font-family: var(--font-display); font-size: 1.6rem; font-weight: 300; color: white; margin-bottom: 0.4rem; }
+    .rdv-form-sub { font-size: 0.8rem; color: rgba(255,255,255,0.4); font-weight: 300; margin-bottom: 2rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); font-weight: 300; margin-bottom: 0.5rem; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.85em 1.2em; background: rgba(255,255,255,0.08); border: 1px solid rgba(59,191,191,0.25); border-radius: var(--radius-sm); color: white; font-family: var(--font-body); font-size: 0.88rem; font-weight: 300; outline: none; transition: border-color 0.3s; -webkit-appearance: none; }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--teal); background: rgba(59,191,191,0.08); }
+    .form-group select option { background: var(--ink); color: white; }
+    .form-group textarea { resize: none; height: 100px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-submit { width: 100%; padding: 1em; background: linear-gradient(135deg, var(--teal), var(--teal-deep)); color: white; border: none; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 0.88rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 400; cursor: pointer; box-shadow: 0 8px 32px rgba(59,191,191,0.3); transition: var(--transition); margin-top: 0.4rem; }
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 14px 42px rgba(59,191,191,0.45); }
+    .form-whatsapp { display: flex; align-items: center; justify-content: center; gap: 0.6em; width: 100%; padding: 0.85em; background: rgba(37,211,102,0.12); color: #25D366; border: 1px solid rgba(37,211,102,0.3); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 0.82rem; font-weight: 400; cursor: pointer; margin-top: 0.8rem; transition: var(--transition); text-decoration: none; }
+    .form-whatsapp:hover { background: rgba(37,211,102,0.2); }
+    .form-multiselect-click { width: 100%; background: rgba(255,255,255,0.08); border: 1px solid rgba(59,191,191,0.25); border-radius: var(--radius-sm); padding: 0.6rem 0.8rem; color: white; font-family: var(--font-body); font-size: 0.88rem; font-weight: 300; outline: none; transition: border-color 0.3s; min-height: 210px; }
+    .form-multiselect-click:focus { border-color: var(--teal); background: rgba(59,191,191,0.08); }
+    .form-multiselect-click option { padding: 0.5rem; background: #1C2B2B; color: white; border-radius: 4px; margin: 2px 0; }
+    .form-multiselect-click option:checked { background: var(--teal) linear-gradient(0deg, var(--teal) 0%, var(--teal-deep) 100%); color: white; font-weight: 400; }
+    .select-click-help { font-size: 0.7rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem; display: inline-block; letter-spacing: 0.03em; }
+
+    /* ═══════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════ */
+    footer { background: #111e1e; padding: 4rem 0 2rem; }
+    .footer-main { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 4rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 2rem; }
+    .f-brand .f-logo { height: 44px; width: auto; margin-bottom: 1.2rem; filter: brightness(0.9); }
+    .f-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.4); line-height: 1.7; font-weight: 300; max-width: 260px; margin-bottom: 1.4rem; }
+    .f-socials { display: flex; gap: 0.8rem; }
+    .f-social { width: 34px; height: 34px; border: 1px solid rgba(59,191,191,0.25); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; color: rgba(255,255,255,0.5); transition: var(--transition); text-decoration: none; }
+    .f-social:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-glass); }
+    .f-col-title { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); font-weight: 400; margin-bottom: 1.4rem; }
+    .f-links { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+    .f-links li a { font-size: 0.82rem; color: rgba(255,255,255,0.4); font-weight: 300; transition: color 0.3s; }
+    .f-links li a:hover { color: var(--teal); }
+    .f-contact-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+    .f-contact-list li { display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.82rem; color: rgba(255,255,255,0.4); font-weight: 300; line-height: 1.5; }
+    .f-contact-list li span:first-child { color: var(--teal); margin-top: 0.1em; flex-shrink: 0; }
+    .footer-copy { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; font-size: 0.72rem; color: rgba(255,255,255,0.2); font-weight: 300; letter-spacing: 0.05em; }
+    .footer-copy a { color: var(--teal-deep); transition: color 0.3s; }
+    .footer-copy a:hover { color: var(--teal); }
+
+    /* ═══════════════════════════════════
+       WAVE DIVIDERS
+    ═══════════════════════════════════ */
+    .wave-divider { overflow: hidden; line-height: 0; margin-bottom: -2px; }
+    .wave-divider svg { display: block; width: 100%; }
+
+    /* ═══════════════════════════════════
+       ANIMATIONS
+    ═══════════════════════════════════ */
+    @keyframes fadeSlideUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes floatBadge { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+    @keyframes pulse { 0%,100% { box-shadow:0 0 0 0 rgba(124,189,107,0.5); } 50% { box-shadow:0 0 0 6px rgba(124,189,107,0); } }
+    .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-delay-1 { transition-delay:0.1s; }
+    .reveal-delay-2 { transition-delay:0.2s; }
+    .reveal-delay-3 { transition-delay:0.3s; }
+    .reveal-delay-4 { transition-delay:0.4s; }
+
+    /* ═══════════════════════════════════
+       MOBILE NAV
+    ═══════════════════════════════════ */
+    .mobile-nav { display:none; position:fixed; inset:0; top:72px; z-index:998; background:rgba(250,250,247,0.98); backdrop-filter:blur(20px); flex-direction:column; align-items:center; justify-content:center; gap:2rem; padding:2rem; }
+    .mobile-nav.open { display:flex; }
+    .mobile-nav a { font-family:var(--font-display); font-size:2rem; font-weight:300; color:var(--ink); transition:color 0.3s; }
+    .mobile-nav a:hover { color:var(--teal-deep); }
+    .mobile-lang-controls { display:flex; align-items:center; gap:1rem; margin-top:1rem; }
+
+    /* ═══════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════ */
+    @media (max-width: 900px) {
+      .nav-links { display:none; }
+      .nav-hamburger { display:flex; }
+      #hero { grid-template-columns:1fr; min-height:auto; padding:100px 0 4rem; }
+      .hero-visual { min-height:320px; }
+      .hero-content { padding:2rem 4% 1rem; }
+      .hero-stats { gap:1.5rem; }
+      .distance-layout, .about-layout, .rdv-layout, .tarifs-layout { grid-template-columns:1fr; gap:2.5rem; }
+      .distance-card-visual { order:-1; }
+      .about-visual { order:-1; }
+      .footer-main { grid-template-columns:1fr; gap:2rem; }
+      .form-row { grid-template-columns:1fr; }
+      .rdv-form-wrap { padding:2rem 1.5rem; }
+      .nav-controls { gap:0.4rem; }
+    }
+    @media (max-width: 600px) {
+      .hero-badge, .hero-badge-2 { display:none; }
+      .promo-cards { grid-template-columns:1fr 1fr; }
+      .services-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════ NAV ══════════════ -->
+  <nav id="main-nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <img src="logo.jpeg" alt="SoS Nutrition" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about" data-i18n="nav.cabinet">Le Cabinet</a></li>
+        <li><a href="#distance" data-i18n="nav.teleconsult">Téléconsultation</a></li>
+        <li><a href="#services" data-i18n="nav.soins">Soins &amp; Massages</a></li>
+        <li><a href="#tarifs" data-i18n="nav.tarifs">Tarifs</a></li>
+        <li><a href="#rdv" class="nav-cta" data-i18n="nav.rdv">Prendre RDV</a></li>
+      </ul>
+      <!-- Theme + Language controls -->
+      <div class="nav-controls">
+        <div class="lang-switch">
+          <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button>
+          <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+        </div>
+        <button class="theme-toggle" id="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+          <span id="theme-icon">🌙</span>
+        </button>
+      </div>
+      <div class="nav-hamburger" id="hamburger" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#about" onclick="toggleMobileNav()" data-i18n="nav.cabinet">Le Cabinet</a>
+    <a href="#distance" onclick="toggleMobileNav()" data-i18n="nav.teleconsult">Téléconsultation</a>
+    <a href="#services" onclick="toggleMobileNav()" data-i18n="nav.soins">Soins &amp; Massages</a>
+    <a href="#tarifs" onclick="toggleMobileNav()" data-i18n="nav.tarifs">Tarifs</a>
+    <a href="#rdv" onclick="toggleMobileNav()" data-i18n="nav.rdv">Prendre RDV</a>
+    <div class="mobile-lang-controls">
+      <div class="lang-switch">
+        <button class="lang-btn active" id="btn-fr-m" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn" id="btn-en-m" onclick="setLang('en')">EN</button>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()"><span id="theme-icon-m">🌙</span></button>
+    </div>
+  </div>
+
+  <!-- ══════════════ HERO ══════════════ -->
+  <section id="hero">
+    <div class="hero-bg-shape"></div>
+    <div class="hero-bg-dots"></div>
+    <div class="hero-content">
+      <span class="tag reveal" data-i18n="hero.tag">Cabinet de Nutrition &amp; Bien-être · Agadir</span>
+      <h1 class="hero-h1 reveal reveal-delay-1" data-i18n-html="hero.h1">
+        Votre bien-être,<br/>
+        <em>une priorité</em>
+        <strong>absolue.</strong>
+      </h1>
+      <p class="hero-tagline reveal reveal-delay-2" data-i18n="hero.tagline">
+        Un accompagnement nutritionnel personnalisé, des soins minceur d'excellence et une approche holistique du bien-être — pour la femme épanouie que vous êtes.
+      </p>
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="#rdv" class="btn-primary" data-i18n="hero.cta1">✦ Prendre Rendez-vous</a>
+        <a href="#services" class="btn-secondary" data-i18n="hero.cta2">Découvrir les soins →</a>
+      </div>
+      <div class="hero-stats reveal reveal-delay-4">
+        <div class="stat-item">
+          <div class="stat-num">500+</div>
+          <div class="stat-label" data-i18n="hero.stat1.label">Patientes suivies</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">10+</div>
+          <div class="stat-label" data-i18n="hero.stat2.label">Années d'expérience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">100%</div>
+          <div class="stat-label" data-i18n="hero.stat3.label">Suivi personnalisé</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-img-wrap">
+        <div class="hero-img-frame">
+          <img src="docteur_photo.png" alt="Notre Nutritionniste — Cabinet SoS Nutrition Agadir" loading="eager" />
+        </div>
+        <div class="hero-badge">
+          <div class="badge-icon">🌿</div>
+          <div class="badge-text">
+            <div class="badge-title" data-i18n="hero.badge.title">Nutritionniste Diplômée</div>
+            <div class="badge-sub" data-i18n="hero.badge.sub">Nutritionniste · Agadir Bay</div>
+          </div>
+        </div>
+        <div class="hero-badge-2">
+          <div class="b2-label" data-i18n="hero.badge2.label">Consultations</div>
+          <div class="b2-val" data-i18n-html="hero.badge2.val">En cabinet<br/>&amp; à distance</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ WAVE ══════════════ -->
+  <div class="wave-divider" style="background:var(--ivory)">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#1C2B2B" opacity="0.97"/>
+    </svg>
+  </div>
+
+  <!-- ══════════════ PROMO ══════════════ -->
+  <section id="promo">
+    <div class="container promo-inner">
+      <div class="promo-header">
+        <div class="promo-eyebrow" data-i18n="promo.eyebrow">Offres Spéciales</div>
+        <h2 class="promo-title" data-i18n-html="promo.title">Promotions <em>Exceptionnelles</em></h2>
+        <p class="promo-subtitle" data-i18n="promo.subtitle">Valables jusqu'à fin juin — En cabinet · Agadir Bay</p>
+      </div>
+      <div class="promo-cards">
+        <div class="promo-card reveal">
+          <div class="p-icon">✨</div>
+          <div class="p-name" data-i18n="promo.c1.name">Pack Machines Laser</div>
+          <div class="p-desc" data-i18n="promo.c1.desc">27 zones traitées — 4 sessions laser ciblées</div>
+          <div class="p-price">3 000 dh</div>
+        </div>
+        <div class="promo-card reveal reveal-delay-1">
+          <div class="p-icon">💫</div>
+          <div class="p-name" data-i18n="promo.c2.name">Pack Machines Lifting</div>
+          <div class="p-desc" data-i18n="promo.c2.desc">20 zones + 5 sessions lifting raffermissant</div>
+          <div class="p-price">3 000 dh</div>
+        </div>
+        <div class="promo-card reveal reveal-delay-2">
+          <div class="p-icon">🌸</div>
+          <div class="p-name" data-i18n="promo.c3.name">Pack Soin Visage</div>
+          <div class="p-desc" data-i18n="promo.c3.desc">3 soins visage premium : hydratant, éclat, anti-âge</div>
+          <div class="p-price">900 dh</div>
+        </div>
+        <div class="promo-card reveal reveal-delay-3">
+          <div class="p-icon">💆</div>
+          <div class="p-name" data-i18n="promo.c4.name">Pressothérapie</div>
+          <div class="p-desc" data-i18n="promo.c4.desc">10 séances de pressothérapie drainante</div>
+          <div class="p-price">1 000 dh</div>
+        </div>
+        <div class="promo-card reveal reveal-delay-4">
+          <div class="p-icon">🔥</div>
+          <div class="p-name" data-i18n="promo.c5.name">Vanquish ME</div>
+          <div class="p-desc" data-i18n="promo.c5.desc">Technologie non invasive — résultats visibles dès la 1ère séance</div>
+          <div class="p-price">1 200 dh <span class="p-old" data-i18n="promo.c5.old">au lieu de 2 600 dh / sc</span></div>
+        </div>
+      </div>
+      <p class="promo-note" data-i18n="promo.note">★ Offres non cumulables · Sur rendez-vous uniquement · Jusqu'au 30 juin 2026</p>
+    </div>
+  </section>
+
+  <!-- ══════════════ WAVE ══════════════ -->
+  <div class="wave-divider" style="background:var(--ivory)">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,30 C480,0 960,60 1440,30 L1440,0 L0,0 Z" fill="#1C2B2B" opacity="0.97"/>
+    </svg>
+  </div>
+
+  <!-- ══════════════ TELECONSULTATION ══════════════ -->
+  <section id="distance">
+    <div class="container">
+      <div class="distance-layout">
+        <div class="distance-card-visual reveal">
+          <div class="distance-glow"></div>
+          <div class="distance-mockup">
+            <div class="dm-header">
+              <div class="dm-avatar">👩‍⚕️</div>
+              <div>
+                <div class="dm-name" data-i18n="distance.card.name">Notre Nutritionniste</div>
+                <div class="dm-title" data-i18n="distance.card.title">Consultation Nutrition en ligne</div>
+              </div>
+              <div class="dm-status"><span class="status-dot"></span></div>
+            </div>
+            <div class="dm-features">
+              <div class="dm-feat">
+                <div class="df-icon">📋</div>
+                <div class="df-text">
+                  <div class="df-label" data-i18n="distance.f1.label">Bilan nutritionnel complet</div>
+                  <div class="df-sub" data-i18n="distance.f1.sub">Analyse de vos habitudes alimentaires</div>
+                </div>
+              </div>
+              <div class="dm-feat">
+                <div class="df-icon">🎯</div>
+                <div class="df-text">
+                  <div class="df-label" data-i18n="distance.f2.label">Programme personnalisé</div>
+                  <div class="df-sub" data-i18n="distance.f2.sub">Plan adapté à vos objectifs et à votre mode de vie</div>
+                </div>
+              </div>
+              <div class="dm-feat">
+                <div class="df-icon">📞</div>
+                <div class="df-text">
+                  <div class="df-label" data-i18n="distance.f3.label">Suivi régulier</div>
+                  <div class="df-sub" data-i18n="distance.f3.sub">Accompagnement continu par téléphone ou visio</div>
+                </div>
+              </div>
+              <div class="dm-feat">
+                <div class="df-icon">🌍</div>
+                <div class="df-text">
+                  <div class="df-label" data-i18n="distance.f4.label">Disponible partout au Maroc et hors Maroc</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="distance-content reveal reveal-delay-2">
+          <div class="distance-highlight" data-i18n="distance.highlight">✦ Service Premium</div>
+          <h2 class="section-title" data-i18n-html="distance.title">Consultation<br/><em>à distance</em></h2>
+          <div class="divider-line"></div>
+          <p class="section-sub" data-i18n="distance.body">
+            Vous ne pouvez pas vous déplacer à Agadir ? Bénéficiez de l'expertise de notre Nutritionniste depuis chez vous. Nos consultations en ligne offrent le même niveau de qualité et de personnalisation qu'une consultation en cabinet.
+          </p>
+          <div class="distance-steps">
+            <div class="d-step">
+              <div class="d-step-num">1</div>
+              <div class="d-step-text">
+                <div class="d-step-title" data-i18n="distance.s1.title">Prise de contact</div>
+                <div class="d-step-desc" data-i18n="distance.s1.desc">Contactez-nous par téléphone ou WhatsApp pour fixer votre créneau de consultation.</div>
+              </div>
+            </div>
+            <div class="d-step">
+              <div class="d-step-num">2</div>
+              <div class="d-step-text">
+                <div class="d-step-title" data-i18n="distance.s2.title">Bilan personnalisé</div>
+                <div class="d-step-desc" data-i18n="distance.s2.desc">La Nutritionniste analyse votre profil nutritionnel, vos objectifs et votre historique de santé.</div>
+              </div>
+            </div>
+            <div class="d-step">
+              <div class="d-step-num">3</div>
+              <div class="d-step-text">
+                <div class="d-step-title" data-i18n="distance.s3.title">Programme &amp; suivi</div>
+                <div class="d-step-desc" data-i18n="distance.s3.desc">Réception de votre plan nutrition sur-mesure, avec un suivi régulier pour vous accompagner.</div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:2.4rem">
+            <a href="#rdv" class="btn-primary" data-i18n="distance.cta">Réserver une consultation en ligne →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ ABOUT ══════════════ -->
+  <section id="about">
+    <div class="container">
+      <div class="about-layout">
+        <div class="about-content reveal">
+          <span class="tag sage" data-i18n="about.tag">Le Cabinet</span>
+          <h2 class="section-title" data-i18n-html="about.title">SoS Nutrition,<br/><em>votre allié bien-être</em></h2>
+          <blockquote class="about-quote" data-i18n="about.quote">
+            "Chaque femme mérite un programme adapté à sa singularité, pas à des normes génériques."
+          </blockquote>
+          <p class="about-text" data-i18n="about.text1">
+            Le cabinet SoS Nutrition d'Agadir Bay a été fondé avec une vision claire : offrir aux femmes un espace d'excellence alliant expertise nutritionnelle et soins du corps de pointe. Notre équipe vous accompagne vers vos objectifs de santé, de forme et de bien-être.
+          </p>
+          <p class="about-text" style="margin-top:1rem" data-i18n="about.text2">
+            Notre approche est holistique : elle intègre la nutrition, les soins corporels, les technologies esthétiques avancées et un suivi personnalisé rigoureux — le tout dans un cadre chaleureux et bienveillant.
+          </p>
+          <div class="about-certifs">
+            <div class="certif-badge"><span>✦</span> <span data-i18n="about.cert1">Nutrition clinique</span></div>
+            <div class="certif-badge"><span>✦</span> <span data-i18n="about.cert2">Soins minceur avancés</span></div>
+            <div class="certif-badge"><span>✦</span> <span data-i18n="about.cert3">Machines ultra-slim</span></div>
+            <div class="certif-badge"><span>✦</span> <span data-i18n="about.cert4">Massages thérapeutiques</span></div>
+          </div>
+          <div class="about-manager-card">
+            <div class="mgr-icon">👤</div>
+            <div>
+              <div class="mgr-name">Mme Bennani Souad</div>
+              <div class="mgr-role" data-i18n="about.mgr.role">Gérante — SoS Nutrition Agadir</div>
+            </div>
+          </div>
+        </div>
+        <div class="about-visual reveal reveal-delay-2">
+          <div class="about-visual-wrap" style="background: linear-gradient(160deg, var(--teal-pale), var(--sage-pale)); border-radius: var(--radius-xl) var(--radius-xl) var(--radius-lg) var(--radius-lg); padding: 3rem 2.5rem; text-align:center;">
+            <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:300;color:var(--teal-deep);letter-spacing:0.08em;margin-bottom:2rem;text-transform:uppercase;" data-i18n="about.promise.header">Notre promesse</div>
+            <div style="display:flex;flex-direction:column;gap:1.2rem;">
+              <div class="promise-card" style="background:white;border-radius:var(--radius-md);padding:1.3rem 1.6rem;text-align:left;box-shadow:var(--shadow-sm);">
+                <div style="font-size:1.3rem;margin-bottom:0.4rem;">🌿</div>
+                <div style="font-family:var(--font-display);font-size:1rem;font-weight:400;color:var(--ink)" data-i18n="about.p1.title">Naturalité &amp; Efficacité</div>
+                <div style="font-size:0.78rem;color:var(--ink-soft);font-weight:300;margin-top:0.2rem;line-height:1.5" data-i18n="about.p1.desc">Des solutions naturelles et des technologies éprouvées pour des résultats durables.</div>
+              </div>
+              <div class="promise-card" style="background:white;border-radius:var(--radius-md);padding:1.3rem 1.6rem;text-align:left;box-shadow:var(--shadow-sm);">
+                <div style="font-size:1.3rem;margin-bottom:0.4rem;">💎</div>
+                <div style="font-family:var(--font-display);font-size:1rem;font-weight:400;color:var(--ink)" data-i18n="about.p2.title">Confidentialité &amp; Respect</div>
+                <div style="font-size:0.78rem;color:var(--ink-soft);font-weight:300;margin-top:0.2rem;line-height:1.5" data-i18n="about.p2.desc">Un suivi dans la bienveillance absolue, sans jugement, à votre rythme.</div>
+              </div>
+              <div class="promise-card" style="background:white;border-radius:var(--radius-md);padding:1.3rem 1.6rem;text-align:left;box-shadow:var(--shadow-sm);">
+                <div style="font-size:1.3rem;margin-bottom:0.4rem;">📍</div>
+                <div style="font-family:var(--font-display);font-size:1rem;font-weight:400;color:var(--ink)" data-i18n="about.p3.title">Agadir Bay · 4ème étage</div>
+                <div style="font-size:0.78rem;color:var(--ink-soft);font-weight:300;margin-top:0.2rem;line-height:1.5" data-i18n="about.p3.desc">Bloc C, N°404 — Un espace pensé pour votre confort et votre sérénité.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ SERVICES ══════════════ -->
+  <section id="services">
+    <div class="container">
+      <div class="services-intro">
+        <span class="tag" data-i18n="services.tag">Soins &amp; Services</span>
+        <h2 class="section-title" data-i18n-html="services.title">Une expertise <em>à votre service</em></h2>
+        <div class="divider-line"></div>
+        <p class="section-sub" data-i18n="services.sub">Des soins corporels et esthétiques d'excellence, réalisés par des professionnelles qualifiées avec des équipements de pointe.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="sc-icon">💆</div>
+          <div class="sc-name" data-i18n="sc1.name">Massages Thérapeutiques</div>
+          <div class="sc-desc" data-i18n="sc1.desc">Une gamme complète de massages ciblés : amincissant, drainant, relaxant, tonifiant et pierre chaude — adaptés à chaque besoin.</div>
+          <div class="sc-variants">
+            <span class="sc-variant" data-i18n="sc1.v1">Amincissant</span>
+            <span class="sc-variant" data-i18n="sc1.v2">Drainant</span>
+            <span class="sc-variant" data-i18n="sc1.v3">Pierre Chaude</span>
+            <span class="sc-variant">Kobido</span>
+            <span class="sc-variant" data-i18n="sc1.v4">Relaxant</span>
+          </div>
+          <a href="#rdv" class="sc-cta" data-i18n="sc.cta">Réserver une séance →</a>
+        </div>
+
+        <div class="service-card reveal reveal-delay-1">
+          <div class="sc-icon sage">🪵</div>
+          <div class="sc-name" data-i18n="sc2.name">Madérothérapie</div>
+          <div class="sc-desc" data-i18n="sc2.desc">Technique de massage aux rouleaux en bois pour sculpter la silhouette, réduire la cellulite et tonifier les tissus de façon naturelle.</div>
+          <div class="sc-variants">
+            <span class="sc-variant" data-i18n="sc2.v1">Corps entier</span>
+            <span class="sc-variant" data-i18n="sc2.v2">Zone ciblée</span>
+            <span class="sc-variant" data-i18n="sc2.v3">Pack 5 sc</span>
+            <span class="sc-variant" data-i18n="sc2.v4">Pack 10 sc</span>
+          </div>
+          <a href="#rdv" class="sc-cta" data-i18n="sc.cta">Réserver une séance →</a>
+        </div>
+
+        <div class="service-card reveal reveal-delay-2">
+          <div class="sc-icon">🔥</div>
+          <div class="sc-name" data-i18n="sc3.name">Ultra Slim — Machine</div>
+          <div class="sc-desc" data-i18n="sc3.desc">Technologies non invasives de dernière génération pour la lipolyse ciblée, le remodelage corporel et la réduction des graisses localisées.</div>
+          <div class="sc-variants">
+            <span class="sc-variant">Ultra Slim G</span>
+            <span class="sc-variant">Ultra Slim Z</span>
+            <span class="sc-variant">Ultra Slim Pro</span>
+            <span class="sc-variant">Vanquish ME</span>
+          </div>
+          <a href="#rdv" class="sc-cta" data-i18n="sc.cta">Réserver une séance →</a>
+        </div>
+
+        <div class="service-card reveal reveal-delay-3">
+          <div class="sc-icon sage">💨</div>
+          <div class="sc-name" data-i18n="sc4.name">Pressothérapie</div>
+          <div class="sc-desc" data-i18n="sc4.desc">Drainage lymphatique par compression séquentielle — idéale pour éliminer les toxines, réduire la rétention d'eau et retrouver des jambes légères.</div>
+          <div class="sc-variants">
+            <span class="sc-variant" data-i18n="sc4.v1">10 séances</span>
+            <span class="sc-variant" data-i18n="promo.badge">Promo fin juin</span>
+          </div>
+          <a href="#rdv" class="sc-cta" data-i18n="sc.cta">Réserver une séance →</a>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="sc-icon">✨</div>
+          <div class="sc-name" data-i18n="sc5.name">Soins du Visage</div>
+          <div class="sc-desc" data-i18n="sc5.desc">Protocoles esthétiques professionnels pour sublimer votre peau : hydratation profonde, éclat du teint et anti-âge sur mesure.</div>
+          <div class="sc-variants">
+            <span class="sc-variant" data-i18n="sc5.v1">Hydratant</span>
+            <span class="sc-variant" data-i18n="sc5.v2">Éclat</span>
+            <span class="sc-variant" data-i18n="sc5.v3">Anti-âge</span>
+            <span class="sc-variant" data-i18n="sc5.v4">Pack 3 soins</span>
+          </div>
+          <a href="#rdv" class="sc-cta" data-i18n="sc.cta">Réserver une séance →</a>
+        </div>
+
+        <div class="service-card pack-card reveal reveal-delay-1" style="background: linear-gradient(160deg, var(--teal-pale), var(--sage-pale)); border-color: rgba(59,191,191,0.25);">
+          <div class="sc-icon">🌿</div>
+          <div class="sc-name" data-i18n="sc6.name">Pack Panaché</div>
+          <div class="sc-desc" style="color:var(--teal-deep)" data-i18n="sc6.desc">L'expérience bien-être ultime. Combine massage relaxant, tonifiant, amincissant, drainant, pierre chaude et Kobido — avec un soin visage offert.</div>
+          <div class="sc-variants">
+            <span class="sc-variant" style="background:white" data-i18n="sc6.v1">Formule complète</span>
+            <span class="sc-variant" style="background:white" data-i18n="sc6.v2">Soin visage offert</span>
+          </div>
+          <a href="#rdv" class="sc-cta" style="color:var(--teal-deep)" data-i18n="sc6.cta">Demander ce pack →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ TARIFS ══════════════ -->
+  <section id="tarifs">
+    <div class="container">
+      <div class="tarifs-layout">
+        <div class="tarifs-intro reveal">
+          <span class="tag" data-i18n="tarifs.tag">Transparence</span>
+          <h2 class="section-title" data-i18n-html="tarifs.title">Nos <em>tarifs</em></h2>
+          <div class="divider-line"></div>
+          <p class="section-sub" style="font-size:0.92rem" data-i18n="tarifs.sub">Chaque formule est pensée pour offrir le meilleur rapport qualité-résultat. Des packs avantageux sont disponibles pour chaque soin.</p>
+          <div class="tarifs-note" data-i18n="tarifs.note">
+            💡 Des forfaits multi-séances sont proposés pour chaque service, avec des économies significatives. Contactez-nous pour un devis personnalisé selon vos objectifs.
+          </div>
+          <div style="margin-top:2rem">
+            <a href="#rdv" class="btn-primary" data-i18n="tarifs.cta">Demander un devis →</a>
+          </div>
+        </div>
+
+        <div class="tarifs-grid reveal reveal-delay-2">
+          <div class="tarif-group">
+            <div class="tg-name" data-i18n-html="tarif.g1">💆 Massages</div>
+            <div class="tg-rows">
+              <div class="tg-row">
+                <div><div class="tg-row-name" data-i18n="tarif.r1.name">Amincissant</div><div class="tg-row-pack" data-i18n="tarif.r1.pack">Pack 10 sc + Madérothérapie offert</div></div>
+                <div class="tg-row-rdv" data-i18n="tarif.rdv">Sur RDV</div>
+              </div>
+              <div class="tg-row">
+                <div><div class="tg-row-name" data-i18n="tarif.r2.name">Drainant</div><div class="tg-row-pack" data-i18n="tarif.r2.pack">Pack 6 sc + 2 Pressothérapie offertes</div></div>
+                <div class="tg-row-rdv" data-i18n="tarif.rdv">Sur RDV</div>
+              </div>
+              <div class="tg-row">
+                <div><div class="tg-row-name" data-i18n="tarif.r3.name">Pierre Chaude</div><div class="tg-row-pack" data-i18n="tarif.r3.pack">Pack 6 sc + Massage tonifiant offert</div></div>
+                <div class="tg-row-rdv" data-i18n="tarif.rdv">Sur RDV</div>
+              </div>
+              <div class="tg-row">
+                <div><div class="tg-row-name">Kobido</div><div class="tg-row-pack" data-i18n="tarif.r4.pack">Pack 5 sc + Massage relaxant offert</div></div>
+                <div class="tg-row-rdv" data-i18n="tarif.rdv">Sur RDV</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tarif-group">
+            <div class="tg-name" data-i18n-html="tarif.g2">🪵 Madérothérapie</div>
+            <div class="tg-rows">
+              <div class="tg-row">
+                <div><div class="tg-row-name" data-i18n="tarif.r5.name">Corps entier</div><div class="tg-row-pack" data-i18n="tarif.r5.pack">Pack 5 sc ou Pack 10 sc</div></div>
+                <div class="tg-row-rdv" data-i18n="tarif.rdv">Sur RDV</div>
+              </div>
+              <div class="tg-row">
+                <div><div class="tg-row-name" data-i18n="tarif.r6.name">Zone ciblée</div><div class="tg-row-pack" data-i18n="tarif.r6.pack">Pack 5 sc ou Pack 10 sc</div></div>
+                <div class="tg-row-rdv" data-i18n="tarif.rdv">Sur RDV</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tarif-group">
+            <div class="tg-name" data-i18n-html="tarif.g3">🔥 Machines Ultra Slim</div>
+            <div class="tg-rows">
+              <div class="tg-row">
+                <div><div class="tg-row-name">Ultra Slim G</div><div class="tg-row-pack" data-i18n="tarif.r7.pack">Pack 8 sc — plusieurs combinaisons</div></div>
+                <div class="tg-row-rdv" data-i18n="tarif.rdv">Sur RDV</div>
+              </div>
+              <div class="tg-row">
+                <div><div class="tg-row-name">Ultra Slim Z</div><div class="tg-row-pack" data-i18n="tarif.r8.pack">Pack 8 sc ou 16 sc</div></div>
+                <div class="tg-row-rdv" data-i18n="tarif.rdv">Sur RDV</div>
+              </div>
+              <div class="tg-row">
+                <div><div class="tg-row-name">Ultra Slim Pro</div><div class="tg-row-pack" data-i18n="tarif.r9.pack">24Z + 8 sessions laser</div></div>
+                <div class="tg-row-rdv" data-i18n="tarif.rdv">Sur RDV</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tarif-group">
+            <div class="tg-name" data-i18n-html="tarif.g4">✨ Soins &amp; Pressothérapie</div>
+            <div class="tg-rows">
+              <div class="tg-row">
+                <div><div class="tg-row-name" data-i18n="tarif.r10.name">Soin visage complet</div><div class="tg-row-pack" data-i18n="tarif.r10.pack">Pack 3 soins (Hydratant + Éclat + Anti-âge)</div></div>
+                <div class="tg-row-rdv" data-i18n="tarif.rdv">Sur RDV</div>
+              </div>
+              <div class="tg-row">
+                <div><div class="tg-row-name" data-i18n="sc4.name">Pressothérapie</div><div class="tg-row-pack" data-i18n="tarif.r11.pack">Pack 10 séances</div></div>
+                <div class="tg-row-rdv" data-i18n="tarif.rdv">Sur RDV</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ RDV ══════════════ -->
+  <section id="rdv">
+    <div class="container">
+      <div class="rdv-layout">
+        <div class="rdv-info reveal">
+          <span class="tag gold" data-i18n="rdv.tag">Rendez-vous</span>
+          <h2 class="section-title" data-i18n-html="rdv.title">Réservez votre <em>séance</em></h2>
+          <div class="divider-line"></div>
+          <p class="section-sub" data-i18n="rdv.sub">Notre équipe est disponible pour répondre à toutes vos questions et vous orienter vers le soin le plus adapté à vos besoins.</p>
+          <div class="rdv-contacts">
+            <div class="rdv-contact">
+              <div class="rc-icon">📍</div>
+              <div class="rc-text">
+                <div class="rc-label" data-i18n="rdv.addr.label">Adresse</div>
+                <div class="rc-val" data-i18n="rdv.addr.val">Bloc C, 4ème étage N°404 · Agadir Bay</div>
+              </div>
+            </div>
+            <a href="tel:0661359033" class="rdv-contact" style="text-decoration:none">
+              <div class="rc-icon">📞</div>
+              <div class="rc-text">
+                <div class="rc-label" data-i18n="rdv.phone1.label">Téléphone</div>
+                <div class="rc-val">0661 35 90 33</div>
+              </div>
+            </a>
+            <a href="tel:0528852885" class="rdv-contact" style="text-decoration:none">
+              <div class="rc-icon">📞</div>
+              <div class="rc-text">
+                <div class="rc-label" data-i18n="rdv.phone2.label">Fixe / Clinique</div>
+                <div class="rc-val">0528 85 28 85</div>
+              </div>
+            </a>
+            <a href="tel:0771899377" class="rdv-contact" style="text-decoration:none">
+              <div class="rc-icon">📱</div>
+              <div class="rc-text">
+                <div class="rc-label">WhatsApp</div>
+                <div class="rc-val">0771 89 93 77</div>
+              </div>
+            </a>
+            <div class="rdv-contact">
+              <div class="rc-icon">🕐</div>
+              <div class="rc-text">
+                <div class="rc-label" data-i18n="rdv.hours.label">Horaires</div>
+                <div class="rc-val" data-i18n="rdv.hours.val">Sur rendez-vous · Lun–Sam</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rdv-form-wrap reveal reveal-delay-2">
+          <div class="rdv-form-title" data-i18n="rdv.form.title">Demande de rendez-vous</div>
+          <div class="rdv-form-sub" data-i18n="rdv.form.sub">Remplissez ce formulaire et nous vous recontactons dans les 24h</div>
+
+          <form id="rdvForm" onsubmit="submitToGoogleSheet(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label data-i18n="rdv.form.prenom">Prénom *</label>
+                <input type="text" id="prenom" data-i18n-ph="rdv.form.prenom.ph" placeholder="Votre prénom" required />
+              </div>
+              <div class="form-group">
+                <label data-i18n="rdv.form.nom">Nom *</label>
+                <input type="text" id="nom" data-i18n-ph="rdv.form.nom.ph" placeholder="Votre nom" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label data-i18n="rdv.form.tel">Téléphone *</label>
+              <input type="tel" id="telephone" data-i18n-ph="rdv.form.tel.ph" placeholder="06 · · · · · · · ·" required />
+            </div>
+            <div class="form-group">
+              <label data-i18n="rdv.form.email">Email *</label>
+              <input type="email" id="email" placeholder="votre@email.com" required />
+            </div>
+            <div class="form-group">
+              <label data-i18n="rdv.form.soins.label">Soin(s) souhaité — cliquez pour sélectionner</label>
+              <select multiple class="form-multiselect-click" id="soinsMultiSelect" size="6">
+                <option value="Consultation nutrition"       data-fr="Consultation nutrition"                        data-en="Nutrition consultation">Consultation nutrition</option>
+                <option value="Consultation à distance"      data-fr="Consultation à distance"                       data-en="Remote consultation">Consultation à distance</option>
+                <option value="Massage amincissant"          data-fr="Massage amincissant"                           data-en="Slimming massage">Massage amincissant</option>
+                <option value="Massage drainant"             data-fr="Massage drainant"                              data-en="Draining massage">Massage drainant</option>
+                <option value="Massage relaxant"             data-fr="Massage relaxant"                              data-en="Relaxing massage">Massage relaxant</option>
+                <option value="Massage tonifiant"            data-fr="Massage tonifiant"                             data-en="Toning massage">Massage tonifiant</option>
+                <option value="Massage pierre chaude"        data-fr="Massage pierre chaude"                         data-en="Hot stone massage">Massage pierre chaude</option>
+                <option value="Kobido"                       data-fr="Kobido"                                        data-en="Kobido">Kobido</option>
+                <option value="Madérothérapie"               data-fr="Madérothérapie"                                data-en="Maderotherapy">Madérothérapie</option>
+                <option value="Machine Ultra Slim"           data-fr="Machine Ultra Slim"                            data-en="Ultra Slim Machine">Machine Ultra Slim</option>
+                <option value="Vanquish ME"                  data-fr="Vanquish ME"                                   data-en="Vanquish ME">Vanquish ME</option>
+                <option value="Pressothérapie"               data-fr="Pressothérapie"                                data-en="Pressotherapy">Pressothérapie</option>
+                <option value="Soin du visage"               data-fr="Soin du visage"                                data-en="Facial treatment">Soin du visage</option>
+                <option value="Pack Panaché"                 data-fr="Pack Panaché"                                  data-en="Combo Pack">Pack Panaché</option>
+                <option value="Pack Machines Laser (Promo juin)"    data-fr="✨ Pack Machines Laser (Promo juin)"   data-en="✨ Laser Machine Pack (June promo)">✨ Pack Machines Laser (Promo juin)</option>
+                <option value="Pack Machines Lifting (Promo juin)"  data-fr="💫 Pack Machines Lifting (Promo juin)" data-en="💫 Lifting Machine Pack (June promo)">💫 Pack Machines Lifting (Promo juin)</option>
+                <option value="Pack Soin Visage (Promo juin)"       data-fr="🌸 Pack Soin Visage (Promo juin)"      data-en="🌸 Facial Care Pack (June promo)">🌸 Pack Soin Visage (Promo juin)</option>
+                <option value="Pressothérapie 10 séances (Promo juin)" data-fr="💆 Pressothérapie 10 sc (Promo juin)" data-en="💆 Pressotherapy 10 sessions (June promo)">💆 Pressothérapie 10 sc (Promo juin)</option>
+                <option value="Vanquish ME tarif promo (Promo juin)"   data-fr="🔥 Vanquish ME Tarif promo (Promo juin)" data-en="🔥 Vanquish ME Promo price (June promo)">🔥 Vanquish ME Tarif promo (Promo juin)</option>
+                <option value="Autre"                        data-fr="Autre (préciser dans le message)"               data-en="Other (specify in message)">Autre (préciser dans le message)</option>
+              </select>
+              <span class="select-click-help" data-i18n="rdv.form.soins.help">✓ Cliquez sur un soin pour l'ajouter ou le retirer.</span>
+            </div>
+            <div class="form-group">
+              <label data-i18n="rdv.form.message">Message (optionnel)</label>
+              <textarea id="message" data-i18n-ph="rdv.form.message.ph" placeholder="Vos disponibilités, questions ou précisions..."></textarea>
+            </div>
+            <button type="submit" class="form-submit" id="submitBtn" data-i18n="rdv.form.submit">Envoyer ma demande</button>
+          </form>
+
+          <a href="https://wa.me/212771899377?text=Bonjour%2C%20je%20souhaite%20prendre%20rendez-vous%20au%20cabinet%20SoS%20Nutrition." class="form-whatsapp" target="_blank">
+            <span>📲</span> <span data-i18n="rdv.whatsapp">Envoyer un message WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ FOOTER ══════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-main">
+        <div class="f-brand">
+          <img src="logo.jpeg" alt="SoS Nutrition" class="f-logo" />
+          <p class="f-tagline" data-i18n="footer.tagline">Cabinet de nutrition et bien-être à Agadir — une approche holistique au service de votre santé et de votre épanouissement.</p>
+          <div class="f-socials">
+            <a href="#" class="f-social" title="Instagram">📸</a>
+            <a href="https://wa.me/212771899377" class="f-social" title="WhatsApp" target="_blank">💬</a>
+            <a href="tel:0661359033" class="f-social" title="Appeler">📞</a>
+          </div>
+        </div>
+        <div>
+          <div class="f-col-title" data-i18n="footer.nav.title">Navigation</div>
+          <ul class="f-links">
+            <li><a href="#about" data-i18n="nav.cabinet">Le cabinet</a></li>
+            <li><a href="#distance" data-i18n="nav.teleconsult">Consultation à distance</a></li>
+            <li><a href="#services" data-i18n="nav.soins">Soins &amp; Massages</a></li>
+            <li><a href="#tarifs" data-i18n="nav.tarifs">Tarifs</a></li>
+            <li><a href="#promo" data-i18n="footer.promo.link">Promotions Juin</a></li>
+            <li><a href="#rdv" data-i18n="nav.rdv">Prendre rendez-vous</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="f-col-title" data-i18n="footer.contact.title">Contact</div>
+          <ul class="f-contact-list">
+            <li><span>📍</span><span data-i18n="rdv.addr.val">Bloc C, 4ème étage N°404<br/>Agadir Bay, Agadir</span></li>
+            <li><span>📞</span><span>0661 35 90 33</span></li>
+            <li><span>📞</span><span>0528 85 28 85</span></li>
+            <li><span>📱</span><span>0771 89 93 77</span></li>
+            <li><span>🕐</span><span data-i18n="rdv.hours.val">Sur rendez-vous<br/>Lundi — Samedi</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-copy">
+        <span data-i18n="footer.copy">© 2026 SoS Nutrition · Tous droits réservés</span>
+        <span data-i18n="footer.location">Agadir Bay, Maroc</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════ SCRIPTS ══════════════ -->
+  <script>
+
+    // ================= CONFIGURATION =================
+    const EMAILJS_PUBLIC_KEY       = '980ZGkSJ6t8ZEbP8P';
+    const EMAILJS_SERVICE_ID       = 'service_u4zheuc';
+    const EMAILJS_ADMIN_TEMPLATE   = 'template_4h56u5g';
+    const EMAILJS_PATIENT_TEMPLATE = 'template_nckt0mg';
+
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+  /* ═══════════════════════════════════
+       TRANSLATIONS
+    ═══════════════════════════════════ */
+    const T = {
+      fr: {
+        'nav.cabinet':'Le Cabinet','nav.teleconsult':'Téléconsultation','nav.soins':'Soins & Massages','nav.tarifs':'Tarifs','nav.rdv':'Prendre RDV',
+        'hero.tag':'Cabinet de Nutrition & Bien-être · Agadir',
+        'hero.h1':'Votre bien-être,<br/><em>une priorité</em><strong>absolue.</strong>',
+        'hero.tagline':'Un accompagnement nutritionnel personnalisé, des soins minceur d\'excellence et une approche holistique du bien-être — pour la femme épanouie que vous êtes.',
+        'hero.cta1':'✦ Prendre Rendez-vous','hero.cta2':'Découvrir les soins →',
+        'hero.stat1.label':'Patientes suivies','hero.stat2.label':'Années d\'expérience','hero.stat3.label':'Suivi personnalisé',
+        'hero.badge.title':'Nutritionniste Diplômée','hero.badge.sub':'Nutritionniste · Agadir Bay',
+        'hero.badge2.label':'Consultations','hero.badge2.val':'En cabinet<br/>&amp; à distance',
+        'promo.eyebrow':'Offres Spéciales','promo.title':'Promotions <em>Exceptionnelles</em>',
+        'promo.subtitle':'Valables jusqu\'à fin juin — En cabinet · Agadir Bay',
+        'promo.c1.name':'Pack Machines Laser','promo.c1.desc':'27 zones traitées — 4 sessions laser ciblées',
+        'promo.c2.name':'Pack Machines Lifting','promo.c2.desc':'20 zones + 5 sessions lifting raffermissant',
+        'promo.c3.name':'Pack Soin Visage','promo.c3.desc':'3 soins visage premium : hydratant, éclat, anti-âge',
+        'promo.c4.name':'Pressothérapie','promo.c4.desc':'10 séances de pressothérapie drainante',
+        'promo.c5.name':'Vanquish ME','promo.c5.desc':'Technologie non invasive — résultats visibles dès la 1ère séance',
+        'promo.c5.old':'au lieu de 2 600 dh / sc',
+        'promo.note':'★ Offres non cumulables · Sur rendez-vous uniquement · Jusqu\'au 30 juin 2026',
+        'promo.badge':'Promo fin juin',
+        'distance.card.name':'Notre Nutritionniste','distance.card.title':'Consultation Nutrition en ligne',
+        'distance.f1.label':'Bilan nutritionnel complet','distance.f1.sub':'Analyse de vos habitudes alimentaires',
+        'distance.f2.label':'Programme personnalisé','distance.f2.sub':'Plan adapté à vos objectifs et à votre mode de vie',
+        'distance.f3.label':'Suivi régulier','distance.f3.sub':'Accompagnement continu par téléphone ou visio',
+        'distance.f4.label':'Disponible partout au Maroc et hors Maroc',
+        'distance.highlight':'✦ Service Premium',
+        'distance.title':'Consultation<br/><em>à distance</em>',
+        'distance.body':'Vous ne pouvez pas vous déplacer à Agadir ? Bénéficiez de l\'expertise de notre Nutritionniste depuis chez vous. Nos consultations en ligne offrent le même niveau de qualité et de personnalisation qu\'une consultation en cabinet.',
+        'distance.s1.title':'Prise de contact','distance.s1.desc':'Contactez-nous par téléphone ou WhatsApp pour fixer votre créneau de consultation.',
+        'distance.s2.title':'Bilan personnalisé','distance.s2.desc':'La Nutritionniste analyse votre profil nutritionnel, vos objectifs et votre historique de santé.',
+        'distance.s3.title':'Programme & suivi','distance.s3.desc':'Réception de votre plan nutrition sur-mesure, avec un suivi régulier pour vous accompagner.',
+        'distance.cta':'Réserver une consultation en ligne →',
+        'about.tag':'Le Cabinet','about.title':'SoS Nutrition,<br/><em>votre allié bien-être</em>',
+        'about.quote':'"Chaque femme mérite un programme adapté à sa singularité, pas à des normes génériques."',
+        'about.text1':'Le cabinet SoS Nutrition d\'Agadir Bay a été fondé avec une vision claire : offrir aux femmes un espace d\'excellence alliant expertise nutritionnelle et soins du corps de pointe. Notre équipe vous accompagne vers vos objectifs de santé, de forme et de bien-être.',
+        'about.text2':'Notre approche est holistique : elle intègre la nutrition, les soins corporels, les technologies esthétiques avancées et un suivi personnalisé rigoureux — le tout dans un cadre chaleureux et bienveillant.',
+        'about.cert1':'Nutrition clinique','about.cert2':'Soins minceur avancés','about.cert3':'Machines ultra-slim','about.cert4':'Massages thérapeutiques',
+        'about.mgr.role':'Gérante — SoS Nutrition Agadir',
+        'about.promise.header':'Notre promesse',
+        'about.p1.title':'Naturalité & Efficacité','about.p1.desc':'Des solutions naturelles et des technologies éprouvées pour des résultats durables.',
+        'about.p2.title':'Confidentialité & Respect','about.p2.desc':'Un suivi dans la bienveillance absolue, sans jugement, à votre rythme.',
+        'about.p3.title':'Agadir Bay · 4ème étage','about.p3.desc':'Bloc C, N°404 — Un espace pensé pour votre confort et votre sérénité.',
+        'services.tag':'Soins & Services','services.title':'Une expertise <em>à votre service</em>',
+        'services.sub':'Des soins corporels et esthétiques d\'excellence, réalisés par des professionnelles qualifiées avec des équipements de pointe.',
+        'sc1.name':'Massages Thérapeutiques','sc1.desc':'Une gamme complète de massages ciblés : amincissant, drainant, relaxant, tonifiant et pierre chaude — adaptés à chaque besoin.',
+        'sc1.v1':'Amincissant','sc1.v2':'Drainant','sc1.v3':'Pierre Chaude','sc1.v4':'Relaxant',
+        'sc2.name':'Madérothérapie','sc2.desc':'Technique de massage aux rouleaux en bois pour sculpter la silhouette, réduire la cellulite et tonifier les tissus de façon naturelle.',
+        'sc2.v1':'Corps entier','sc2.v2':'Zone ciblée','sc2.v3':'Pack 5 sc','sc2.v4':'Pack 10 sc',
+        'sc3.name':'Ultra Slim — Machine','sc3.desc':'Technologies non invasives de dernière génération pour la lipolyse ciblée, le remodelage corporel et la réduction des graisses localisées.',
+        'sc4.name':'Pressothérapie','sc4.desc':'Drainage lymphatique par compression séquentielle — idéale pour éliminer les toxines, réduire la rétention d\'eau et retrouver des jambes légères.',
+        'sc4.v1':'10 séances',
+        'sc5.name':'Soins du Visage','sc5.desc':'Protocoles esthétiques professionnels pour sublimer votre peau : hydratation profonde, éclat du teint et anti-âge sur mesure.',
+        'sc5.v1':'Hydratant','sc5.v2':'Éclat','sc5.v3':'Anti-âge','sc5.v4':'Pack 3 soins',
+        'sc6.name':'Pack Panaché','sc6.desc':'L\'expérience bien-être ultime. Combine massage relaxant, tonifiant, amincissant, drainant, pierre chaude et Kobido — avec un soin visage offert.',
+        'sc6.v1':'Formule complète','sc6.v2':'Soin visage offert','sc6.cta':'Demander ce pack →',
+        'sc.cta':'Réserver une séance →',
+        'tarifs.tag':'Transparence','tarifs.title':'Nos <em>tarifs</em>',
+        'tarifs.sub':'Chaque formule est pensée pour offrir le meilleur rapport qualité-résultat. Des packs avantageux sont disponibles pour chaque soin.',
+        'tarifs.note':'💡 Des forfaits multi-séances sont proposés pour chaque service, avec des économies significatives. Contactez-nous pour un devis personnalisé selon vos objectifs.',
+        'tarifs.cta':'Demander un devis →',
+        'tarif.g1':'💆 Massages','tarif.g2':'🪵 Madérothérapie','tarif.g3':'🔥 Machines Ultra Slim','tarif.g4':'✨ Soins & Pressothérapie',
+        'tarif.rdv':'Sur RDV',
+        'tarif.r1.name':'Amincissant','tarif.r1.pack':'Pack 10 sc + Madérothérapie offert',
+        'tarif.r2.name':'Drainant','tarif.r2.pack':'Pack 6 sc + 2 Pressothérapie offertes',
+        'tarif.r3.name':'Pierre Chaude','tarif.r3.pack':'Pack 6 sc + Massage tonifiant offert',
+        'tarif.r4.pack':'Pack 5 sc + Massage relaxant offert',
+        'tarif.r5.name':'Corps entier','tarif.r5.pack':'Pack 5 sc ou Pack 10 sc',
+        'tarif.r6.name':'Zone ciblée','tarif.r6.pack':'Pack 5 sc ou Pack 10 sc',
+        'tarif.r7.pack':'Pack 8 sc — plusieurs combinaisons',
+        'tarif.r8.pack':'Pack 8 sc ou 16 sc',
+        'tarif.r9.pack':'24Z + 8 sessions laser',
+        'tarif.r10.name':'Soin visage complet','tarif.r10.pack':'Pack 3 soins (Hydratant + Éclat + Anti-âge)',
+        'tarif.r11.pack':'Pack 10 séances',
+        'rdv.tag':'Rendez-vous','rdv.title':'Réservez votre <em>séance</em>',
+        'rdv.sub':'Notre équipe est disponible pour répondre à toutes vos questions et vous orienter vers le soin le plus adapté à vos besoins.',
+        'rdv.addr.label':'Adresse','rdv.addr.val':'Bloc C, 4ème étage N°404 · Agadir Bay',
+        'rdv.phone1.label':'Téléphone','rdv.phone2.label':'Fixe / Clinique',
+        'rdv.hours.label':'Horaires','rdv.hours.val':'Sur rendez-vous · Lun–Sam',
+        'rdv.form.title':'Demande de rendez-vous','rdv.form.sub':'Remplissez ce formulaire et nous vous recontactons dans les 24h',
+        'rdv.form.prenom':'Prénom *','rdv.form.prenom.ph':'Votre prénom',
+        'rdv.form.nom':'Nom *','rdv.form.nom.ph':'Votre nom',
+        'rdv.form.tel':'Téléphone *','rdv.form.tel.ph':'06 · · · · · · · ·',
+        'rdv.form.email':'Email *',
+        'rdv.form.soins.label':'Soin(s) souhaité — cliquez pour sélectionner',
+        'rdv.form.soins.help':'✓ Cliquez sur un soin pour l\'ajouter ou le retirer.',
+        'rdv.form.message':'Message (optionnel)','rdv.form.message.ph':'Vos disponibilités, questions ou précisions...',
+        'rdv.form.submit':'Envoyer ma demande',
+        'rdv.whatsapp':'Envoyer un message WhatsApp',
+        'footer.tagline':'Cabinet de nutrition et bien-être à Agadir — une approche holistique au service de votre santé et de votre épanouissement.',
+        'footer.nav.title':'Navigation','footer.contact.title':'Contact',
+        'footer.promo.link':'Promotions Juin',
+        'footer.copy':'© 2026 SoS Nutrition · Tous droits réservés',
+        'footer.location':'Agadir Bay, Maroc',
+      },
+      en: {
+        'nav.cabinet':'The Clinic','nav.teleconsult':'Teleconsultation','nav.soins':'Treatments & Massages','nav.tarifs':'Pricing','nav.rdv':'Book Now',
+        'hero.tag':'Nutrition & Wellness Clinic · Agadir',
+        'hero.h1':'Your wellbeing,<br/><em>an absolute</em><strong>priority.</strong>',
+        'hero.tagline':'Personalised nutritional support, premium slimming treatments and a holistic approach to wellbeing — for the fulfilled woman you are.',
+        'hero.cta1':'✦ Book an Appointment','hero.cta2':'Discover treatments →',
+        'hero.stat1.label':'Patients followed','hero.stat2.label':'Years of experience','hero.stat3.label':'Personalised follow-up',
+        'hero.badge.title':'Certified Nutritionist','hero.badge.sub':'Nutritionist · Agadir Bay',
+        'hero.badge2.label':'Consultations','hero.badge2.val':'In-clinic<br/>&amp; remote',
+        'promo.eyebrow':'Special Offers','promo.title':'Exceptional <em>Promotions</em>',
+        'promo.subtitle':'Valid until end of June — In clinic · Agadir Bay',
+        'promo.c1.name':'Laser Machine Pack','promo.c1.desc':'27 treated areas — 4 targeted laser sessions',
+        'promo.c2.name':'Lifting Machine Pack','promo.c2.desc':'20 areas + 5 firming lifting sessions',
+        'promo.c3.name':'Facial Care Pack','promo.c3.desc':'3 premium facials: hydrating, brightening, anti-ageing',
+        'promo.c4.name':'Pressotherapy','promo.c4.desc':'10 draining pressotherapy sessions',
+        'promo.c5.name':'Vanquish ME','promo.c5.desc':'Non-invasive technology — visible results from the 1st session',
+        'promo.c5.old':'instead of 2,600 dh / session',
+        'promo.note':'★ Offers cannot be combined · By appointment only · Until 30 June 2026',
+        'promo.badge':'June promo',
+        'distance.card.name':'Our Nutritionist','distance.card.title':'Online Nutrition Consultation',
+        'distance.f1.label':'Complete nutritional assessment','distance.f1.sub':'Analysis of your eating habits',
+        'distance.f2.label':'Personalised programme','distance.f2.sub':'Plan tailored to your goals and lifestyle',
+        'distance.f3.label':'Regular follow-up','distance.f3.sub':'Ongoing support by phone or video call',
+        'distance.f4.label':'Available everywhere in Morocco and abroad',
+        'distance.highlight':'✦ Premium Service',
+        'distance.title':'Remote<br/><em>Consultation</em>',
+        'distance.body':'Can\'t travel to Agadir? Benefit from our Nutritionist\'s expertise from the comfort of your home. Our online consultations offer the same level of quality and personalisation as an in-clinic visit.',
+        'distance.s1.title':'Get in touch','distance.s1.desc':'Contact us by phone or WhatsApp to schedule your consultation slot.',
+        'distance.s2.title':'Personalised assessment','distance.s2.desc':'The Nutritionist analyses your nutritional profile, goals and health history.',
+        'distance.s3.title':'Programme & follow-up','distance.s3.desc':'Receive your bespoke nutrition plan with regular follow-up to guide you.',
+        'distance.cta':'Book an online consultation →',
+        'about.tag':'The Clinic','about.title':'SoS Nutrition,<br/><em>your wellness partner</em>',
+        'about.quote':'"Every woman deserves a programme tailored to her uniqueness, not to generic standards."',
+        'about.text1':'SoS Nutrition clinic in Agadir Bay was founded with a clear vision: to offer women a space of excellence combining nutritional expertise and cutting-edge body treatments. Our team guides you towards your health, fitness and wellbeing goals.',
+        'about.text2':'Our approach is holistic: it integrates nutrition, body care, advanced aesthetic technologies and rigorous personalised follow-up — all within a warm and caring environment.',
+        'about.cert1':'Clinical nutrition','about.cert2':'Advanced slimming treatments','about.cert3':'Ultra-slim machines','about.cert4':'Therapeutic massages',
+        'about.mgr.role':'Manager — SoS Nutrition Agadir',
+        'about.promise.header':'Our promise',
+        'about.p1.title':'Natural & Effective','about.p1.desc':'Natural solutions and proven technologies for lasting results.',
+        'about.p2.title':'Confidentiality & Respect','about.p2.desc':'Caring follow-up with absolute discretion, non-judgmental, at your own pace.',
+        'about.p3.title':'Agadir Bay · 4th floor','about.p3.desc':'Block C, No. 404 — A space designed for your comfort and serenity.',
+        'services.tag':'Treatments & Services','services.title':'Expertise <em>at your service</em>',
+        'services.sub':'Premium body and aesthetic treatments, performed by qualified professionals with state-of-the-art equipment.',
+        'sc1.name':'Therapeutic Massages','sc1.desc':'A complete range of targeted massages: slimming, draining, relaxing, toning and hot stone — tailored to every need.',
+        'sc1.v1':'Slimming','sc1.v2':'Draining','sc1.v3':'Hot Stone','sc1.v4':'Relaxing',
+        'sc2.name':'Maderotherapy','sc2.desc':'Wood roller massage technique to sculpt the figure, reduce cellulite and tone tissues naturally.',
+        'sc2.v1':'Full body','sc2.v2':'Targeted zone','sc2.v3':'5-session pack','sc2.v4':'10-session pack',
+        'sc3.name':'Ultra Slim — Machine','sc3.desc':'Latest-generation non-invasive technologies for targeted lipolysis, body remodelling and reduction of localised fat.',
+        'sc4.name':'Pressotherapy','sc4.desc':'Lymphatic drainage by sequential compression — ideal for eliminating toxins, reducing water retention and achieving lighter legs.',
+        'sc4.v1':'10 sessions',
+        'sc5.name':'Facial Treatments','sc5.desc':'Professional aesthetic protocols to enhance your skin: deep hydration, radiance boost and bespoke anti-ageing.',
+        'sc5.v1':'Hydrating','sc5.v2':'Brightening','sc5.v3':'Anti-ageing','sc5.v4':'3-treatment pack',
+        'sc6.name':'Combo Pack','sc6.desc':'The ultimate wellness experience. Combines relaxing, toning, slimming, draining, hot stone and Kobido massages — with a complimentary facial.',
+        'sc6.v1':'Full formula','sc6.v2':'Facial included','sc6.cta':'Request this pack →',
+        'sc.cta':'Book a session →',
+        'tarifs.tag':'Transparency','tarifs.title':'Our <em>pricing</em>',
+        'tarifs.sub':'Every formula is designed to offer the best value for results. Advantageous packs are available for each treatment.',
+        'tarifs.note':'💡 Multi-session packages are available for each service, with significant savings. Contact us for a personalised quote based on your goals.',
+        'tarifs.cta':'Request a quote →',
+        'tarif.g1':'💆 Massages','tarif.g2':'🪵 Maderotherapy','tarif.g3':'🔥 Ultra Slim Machines','tarif.g4':'✨ Facials & Pressotherapy',
+        'tarif.rdv':'By appt.',
+        'tarif.r1.name':'Slimming','tarif.r1.pack':'10-session pack + Maderotherapy free',
+        'tarif.r2.name':'Draining','tarif.r2.pack':'6-session pack + 2 Pressotherapy sessions free',
+        'tarif.r3.name':'Hot Stone','tarif.r3.pack':'6-session pack + Toning massage free',
+        'tarif.r4.pack':'5-session pack + Relaxing massage free',
+        'tarif.r5.name':'Full body','tarif.r5.pack':'5-session or 10-session pack',
+        'tarif.r6.name':'Targeted zone','tarif.r6.pack':'5-session or 10-session pack',
+        'tarif.r7.pack':'8-session pack — multiple combinations',
+        'tarif.r8.pack':'8-session or 16-session pack',
+        'tarif.r9.pack':'24Z + 8 laser sessions',
+        'tarif.r10.name':'Full facial treatment','tarif.r10.pack':'3-treatment pack (Hydrating + Brightening + Anti-ageing)',
+        'tarif.r11.pack':'10-session pack',
+        'rdv.tag':'Appointment','rdv.title':'Book your <em>session</em>',
+        'rdv.sub':'Our team is available to answer all your questions and guide you to the treatment best suited to your needs.',
+        'rdv.addr.label':'Address','rdv.addr.val':'Block C, 4th floor No. 404 · Agadir Bay',
+        'rdv.phone1.label':'Phone','rdv.phone2.label':'Landline / Clinic',
+        'rdv.hours.label':'Hours','rdv.hours.val':'By appointment · Mon–Sat',
+        'rdv.form.title':'Appointment request','rdv.form.sub':'Fill in this form and we\'ll get back to you within 24h',
+        'rdv.form.prenom':'First name *','rdv.form.prenom.ph':'Your first name',
+        'rdv.form.nom':'Last name *','rdv.form.nom.ph':'Your last name',
+        'rdv.form.tel':'Phone *','rdv.form.tel.ph':'06 · · · · · · · ·',
+        'rdv.form.email':'Email *',
+        'rdv.form.soins.label':'Desired treatment(s) — click to select',
+        'rdv.form.soins.help':'✓ Click a treatment to add or remove it.',
+        'rdv.form.message':'Message (optional)','rdv.form.message.ph':'Your availability, questions or details...',
+        'rdv.form.submit':'Send my request',
+        'rdv.whatsapp':'Send a WhatsApp message',
+        'footer.tagline':'Nutrition and wellness clinic in Agadir — a holistic approach in service of your health and fulfilment.',
+        'footer.nav.title':'Navigation','footer.contact.title':'Contact',
+        'footer.promo.link':'June Promotions',
+        'footer.copy':'© 2026 SoS Nutrition · All rights reserved',
+        'footer.location':'Agadir Bay, Morocco',
+      }
+    };
+
+    /* ═══════════════════════════════════
+       LANG SWITCHER
+    ═══════════════════════════════════ */
+    let currentLang = localStorage.getItem('sos-lang') || 'fr';
+
+    function setLang(lang) {
+      currentLang = lang;
+      const d = T[lang];
+
+      // Text content
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const k = el.dataset.i18n;
+        if (d[k] !== undefined) el.textContent = d[k];
+      });
+
+      // innerHTML (for elements with em, br, strong tags)
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const k = el.dataset.i18nHtml;
+        if (d[k] !== undefined) el.innerHTML = d[k];
+      });
+
+      // Placeholders
+      document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        const k = el.dataset.i18nPh;
+        if (d[k] !== undefined) el.placeholder = d[k];
+      });
+
+      // Select options
+      document.querySelectorAll('option[data-fr]').forEach(opt => {
+        opt.textContent = lang === 'fr' ? opt.dataset.fr : opt.dataset.en;
+      });
+
+      // Button active states (desktop + mobile)
+      ['btn-fr','btn-fr-m'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.toggle('active', lang === 'fr');
+      });
+      ['btn-en','btn-en-m'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.toggle('active', lang === 'en');
+      });
+
+      document.documentElement.lang = lang;
+      localStorage.setItem('sos-lang', lang);
+    }
+
+    /* ═══════════════════════════════════
+       THEME SWITCHER
+    ═══════════════════════════════════ */
+    function syncThemeIcons() {
+      const isDark = document.documentElement.dataset.theme === 'dark';
+      const icon = isDark ? '☀️' : '🌙';
+      ['theme-icon','theme-icon-m'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = icon;
+      });
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.dataset.theme === 'dark';
+      document.documentElement.dataset.theme = isDark ? 'light' : 'dark';
+      localStorage.setItem('sos-theme', isDark ? 'light' : 'dark');
+      syncThemeIcons();
+    }
+
+    /* ═══════════════════════════════════
+       INIT
+    ═══════════════════════════════════ */
+    syncThemeIcons();
+    if (currentLang !== 'fr') setLang(currentLang);
+    else {
+      ['btn-fr','btn-fr-m'].forEach(id => { const el = document.getElementById(id); if(el) el.classList.add('active'); });
+    }
+
+    /* ═══════════════════════════════════
+       REVEAL ON SCROLL
+    ═══════════════════════════════════ */
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* ═══════════════════════════════════
+       NAV SCROLL EFFECT
+    ═══════════════════════════════════ */
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.style.boxShadow = window.scrollY > 40 ? '0 4px 30px rgba(28,43,43,0.1)' : 'none';
+    });
+
+    /* ═══════════════════════════════════
+       MOBILE NAV
+    ═══════════════════════════════════ */
+    function toggleMobileNav() {
+      document.getElementById('mobile-nav').classList.toggle('open');
+    }
+
+    /* ═══════════════════════════════════
+       MULTISELECT (click to toggle)
+    ═══════════════════════════════════ */
+    const multiSelect = document.getElementById('soinsMultiSelect');
+    if (multiSelect) {
+      multiSelect.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        const option = e.target;
+        if (option.tagName === 'OPTION') {
+          option.selected = !option.selected;
+          multiSelect.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        return false;
+      });
+    }
+
+    /* ═══════════════════════════════════
+       GOOGLE SHEETS SUBMISSION
+    ═══════════════════════════════════ */
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyd8l4SgvC5GzoZhX-FdqeQTtHMNqDyxfCskMQLwJZmZHoyVeX2Xwo20StUGG32QcIApA/exec';
+    
+    async function submitToGoogleSheet(event) {
+      event.preventDefault();
+
+      const prenom    = document.getElementById('prenom').value.trim();
+      const nom       = document.getElementById('nom').value.trim();
+      const telephone = document.getElementById('telephone').value.trim();
+      const email     = document.getElementById('email').value.trim();
+      const message   = document.getElementById('message').value.trim();
+
+      if (!prenom || !telephone || !email) {
+        alert(currentLang === 'fr'
+          ? "Veuillez remplir au moins le prénom, le téléphone et l'email."
+          : "Please fill in at least your first name, phone and email.");
+        return;
+      }
+
+      const selectedSoins = Array.from(multiSelect.selectedOptions).map(opt => opt.value);
+      if (selectedSoins.length === 0) {
+        alert(currentLang === 'fr'
+          ? "Veuillez sélectionner au moins un soin."
+          : "Please select at least one treatment.");
+        return;
+      }
+
+      const submitBtn   = document.getElementById('submitBtn');
+      const originalText = T[currentLang]['rdv.form.submit'];
+      submitBtn.textContent = currentLang === 'fr' ? 'Envoi en cours...' : 'Sending...';
+      submitBtn.disabled = true;
+
+      const templateParams = {
+        prenom:    prenom,
+        nom:       nom,
+        telephone: telephone,
+        email:     email,
+        soins:     selectedSoins.join(', '),
+        message:   message || 'Aucun message'
+      };
+
+      try {
+        // 1. Email to clinic
+        const res1 = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_ADMIN_TEMPLATE, templateParams);
+        console.log('Admin email OK:', res1.status, res1.text);
+
+        // 2. Confirmation email to client
+        const res2 = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_PATIENT_TEMPLATE, templateParams);
+        console.log('Patient email OK:', res2.status, res2.text);
+
+        // 3. Google Sheets
+        await fetch(SCRIPT_URL, {
+          method: 'POST', mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'submitRdv', prenom, nom, telephone, email, soins: selectedSoins.join(', '), message })
+        });
+
+        submitBtn.textContent = currentLang === 'fr'
+          ? '✓ Demande envoyée ! Nous vous répondrons sous 24h.'
+          : '✓ Request sent! We\'ll reply within 24h.';
+        submitBtn.style.background = 'linear-gradient(135deg, var(--sage), var(--sage-deep))';
+        document.getElementById('rdvForm').reset();
+        Array.from(multiSelect.options).forEach(o => o.selected = false);
+
+      } catch (err) {
+        // Show the REAL error in the console
+        console.error('EmailJS error — status:', err.status);
+        console.error('EmailJS error — text:', err.text);
+        console.error('Full error object:', JSON.stringify(err));
+        alert('ERREUR DÉTAILLÉE: ' + (err.text || err.message || JSON.stringify(err)));
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
